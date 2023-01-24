@@ -25,3 +25,6 @@ Route::get('/news', function () {
 Route::get('/news/{id}', static function (int $id): string {
     return "News {$id}";
 });
+Route::get('/test/{id}', static function (int $id): string {
+    return "Test {$id}";
+});
