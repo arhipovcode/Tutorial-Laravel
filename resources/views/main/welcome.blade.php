@@ -26,7 +26,7 @@
     </head>
     <body class="antialiased">
         <div class="container">
-            <h1>Страница новостей</h1>
+            <h1>Hello User... </h1>
         </div>
     </body>
 </html>

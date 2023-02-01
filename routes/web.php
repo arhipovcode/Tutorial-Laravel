@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\Main\MainController;
+use App\Http\Controllers\News\CategoryController;
+use App\Http\Controllers\News\NewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,18 +17,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [MainController::class, 'index'])->name('main');
+
+Route::group([
+    'prefix' => '/news', // это общий url
+    'as' => 'news' // общий алиас
+], function() {
+    Route::get('', [NewsController::class, 'index'])->name('');
+    Route::get('/{id}/show', [NewsController::class, 'show'])->name('::one')
+        ->where('id', '\d+');
+    Route::get('/category', [CategoryController::class, 'index'])->name('::category');
 });
+
+
+Route::get('/admin', [IndexController::class, 'index']);
+
 Route::get('/about-project', function () {
     return view('info-project');
 });
-Route::get('/news', function () {
-    return view('news');
-});
-Route::get('/news/{id}', static function (int $id): string {
-    return "News {$id}";
-});
+
 Route::get('/test/{id}', static function (int $id): string {
     return "Test {$id}";
 });

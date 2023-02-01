@@ -22,11 +22,38 @@
                 width: 1170px;
                 margin: 0 auto;
             }
+            .d-flex {
+                display: flex;
+            }
+            .al-center {
+                align-items: center;
+            }
+            .mr-16 {
+                margin-right: 16px;
+            }
+            .text-bold {
+                font-weight: bold;
+            }
         </style>
     </head>
-    <body class="antialiased">
+    <body>
         <div class="container">
-            <h1>Hello User...</h1>
+            <h1>Страница новостей</h1>
+            @foreach ($news as $item)
+                <div class="card-news">
+                    <h3 class="card-news-title">{{ $item['title'] }}</h3>
+
+                    <p class="card-news-description">{{ $item['description'] }}</p>
+
+                    <div class="card-news-wrap d-flex al-center text-bold">
+                        <p class="card-news-description mr-16">{{ $item['author'] }}</p>
+                        <p class="publish_date">{{ $item['created_at'] }}</p>
+                    </div>
+
+                    <a style="border: 1px solid #cccccc;padding: 4px 12px"
+                       href="{{ route('news::one', ['id' => $item['id']]) }}">Посмотреть новость</a>
+                </div>
+            @endforeach
         </div>
     </body>
 </html>
