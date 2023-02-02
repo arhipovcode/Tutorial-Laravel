@@ -22,11 +22,24 @@
             width: 1170px;
             margin: 0 auto;
         }
+        .d-flex {
+            display: flex;
+        }
+        .al-center {
+            align-items: center;
+        }
+        .mr-16 {
+            margin-right: 16px;
+        }
+        .text-bold {
+            font-weight: bold;
+        }
     </style>
 </head>
-<body class="antialiased">
+<body>
 <div class="container">
-    <h1>Мой первый проект на фреймворке Laravel.</h1>
+    <h1>Страница категорий новостей</h1>
+
 </div>
 </body>
 </html>
