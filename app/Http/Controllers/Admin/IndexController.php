@@ -4,15 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class IndexController extends Controller
 {
-    public function index()
+    /**
+     * Handle the incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function __invoke(Request $request): View
     {
-        return <<<php
-            <h1>Точка входа для админа</h1>
-            <p>Тут какой то текст</p> <br>
-            <a href="/">Возврат на главную</a>
-        php;
+        return \view('admin.index');
     }
 }

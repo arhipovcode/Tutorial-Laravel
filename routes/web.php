@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\Admin\IndexController as AdminController;
 use App\Http\Controllers\Main\MainController;
 use App\Http\Controllers\News\CategoryController;
 use App\Http\Controllers\News\NewsController;
@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainController::class, 'index'])->name('main');
 
+//news routes
 Route::group([
     'prefix' => '/news', // это общий url
     'as' => 'news' // общий алиас
@@ -29,13 +30,10 @@ Route::group([
     Route::get('/category', [CategoryController::class, 'index'])->name('::category');
 });
 
-
-Route::get('/admin', [IndexController::class, 'index']);
-
-Route::get('/about-project', function () {
-    return view('info-project');
-});
-
-Route::get('/test/{id}', static function (int $id): string {
-    return "Test {$id}";
+//admin routes
+Route::group([
+    'prefix' => 'admin',
+    'as' => 'admin::'
+], function () {
+    Route::get('/', AdminController::class)->name('index');
 });
