@@ -5,7 +5,7 @@
 @section('main')
     <section class="welcome">
         <div class="container">
-            <h1>Hello User... </h1>
+            <h1>Добро пожаловать на сайт! Главная страница</h1>
         </div>
     </section>
 @endsection
