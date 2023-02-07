@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\IndexController as AdminController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\User\IndexController as UserController;
+use App\Http\Controllers\User\UserControlController;
 use App\Http\Controllers\Main\MainController;
 use App\Http\Controllers\News\CategoryController;
 use App\Http\Controllers\News\NewsController;
@@ -17,7 +21,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [MainController::class, 'index'])->name('main');
+Route::get('', [MainController::class, 'index'])->name('main');
+//Route::get('/', function () {
+//    return 'Какой то текст';
+//})->name('main'); //Для теста
 
 //news routes
 Route::group([
@@ -33,7 +40,18 @@ Route::group([
 //admin routes
 Route::group([
     'prefix' => 'admin',
-    'as' => 'admin::'
+    'as' => 'admin.'
 ], function () {
     Route::get('/', AdminController::class)->name('index');
+    Route::resource('categories', AdminCategoryController::class);
+    Route::resource('news', AdminNewsController::class);
+});
+
+//User routes
+Route::group([
+    'prefix' => 'user',
+    'as' => 'user.'
+], function () {
+    Route::get('/', UserController::class)->name('index');
+    Route::resource('add', UserControlController::class);
 });

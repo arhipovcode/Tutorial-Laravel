@@ -1,32 +1,31 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
-class NewsController extends Controller
+class UserControlController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return View
+     * @return \Illuminate\Http\Response
      */
     public function index(): View
     {
-        return \view('admin.news.index');
+        return \view('user.index');
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return View
+     * @return \Illuminate\Http\Response
      */
     public function create(): View
     {
-//        file_put_contents() для добавления файла
-        return \view('admin.news.create');
+        return \view('user.create');
     }
 
     /**
@@ -35,11 +34,9 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request): View
     {
-//        dd($request->input('title')); // Получение одного поля
-//        dd($request->only(['title', 'description']));// Перечисление полей, которые нужны
-//        dd($request->except(['title', 'description'])); // Исключение
+        return \view('user.index',['nameUser' => $request->input('user-name')]);
     }
 
     /**
