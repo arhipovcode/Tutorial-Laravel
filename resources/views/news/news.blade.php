@@ -10,11 +10,12 @@
             <div class="card-grid">
                 @forelse($news as $item)
                     <x-cards.news
-                        :title="$item['title']"
-                        :description="$item['description']"
-                        :author="$item['author']"
-                        :date="$item['created_at']"
-                        :link="route('news::one', ['id' => $item['id']])">
+                        :status="$item->status"
+                        :title="$item->title"
+                        :description="$item->description"
+                        :author="$item->author"
+                        :date="$item->created_at"
+                        :link="route('news::one', ['id' => $item->id])">
                     </x-cards.news>
                 @empty
                     <h2>Новостей нет</h2>

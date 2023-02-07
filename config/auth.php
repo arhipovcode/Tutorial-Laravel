@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'user',
+        'passwords' => 'users',
     ],
 
     /*
@@ -25,11 +25,11 @@ return [
     |
     | Next, you may define every authentication guard for your application.
     | Of course, a great default configuration has been defined for you
-    | here which uses session storage and the Eloquent user provider.
+    | here which uses session storage and the Eloquent users provider.
     |
-    | All authentication drivers have a user provider. This defines how the
-    | user are actually retrieved out of your database or other storage
-    | mechanisms used by this application to persist your user's data.
+    | All authentication drivers have a users provider. This defines how the
+    | users are actually retrieved out of your database or other storage
+    | mechanisms used by this application to persist your users's data.
     |
     | Supported: "session"
     |
@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'user',
+            'provider' => 'users',
         ],
     ],
 
@@ -47,11 +47,11 @@ return [
     | User Providers
     |--------------------------------------------------------------------------
     |
-    | All authentication drivers have a user provider. This defines how the
-    | user are actually retrieved out of your database or other storage
-    | mechanisms used by this application to persist your user's data.
+    | All authentication drivers have a users provider. This defines how the
+    | users are actually retrieved out of your database or other storage
+    | mechanisms used by this application to persist your users's data.
     |
-    | If you have multiple user tables or models you may configure multiple
+    | If you have multiple users tables or models you may configure multiple
     | sources which represent each model / table. These sources may then
     | be assigned to any extra authentication guards you have defined.
     |
@@ -60,14 +60,14 @@ return [
     */
 
     'providers' => [
-        'user' => [
+        'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
 
-        // 'user' => [
+        // 'users' => [
         //     'driver' => 'database',
-        //     'table' => 'user',
+        //     'table' => 'users',
         // ],
     ],
 
@@ -77,8 +77,8 @@ return [
     |--------------------------------------------------------------------------
     |
     | You may specify multiple password reset configurations if you have more
-    | than one user table or model in the application and you want to have
-    | separate password reset settings based on the specific user types.
+    | than one users table or model in the application and you want to have
+    | separate password reset settings based on the specific users types.
     |
     | The expire time is the number of minutes that each reset token will be
     | considered valid. This security feature keeps tokens short-lived so
@@ -87,8 +87,8 @@ return [
     */
 
     'passwords' => [
-        'user' => [
-            'provider' => 'user',
+        'users' => [
+            'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
@@ -101,7 +101,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may define the amount of seconds before a password confirmation
-    | times out and the user is prompted to re-enter their password via the
+    | times out and the users is prompted to re-enter their password via the
     | confirmation screen. By default, the timeout lasts for three hours.
     |
     */

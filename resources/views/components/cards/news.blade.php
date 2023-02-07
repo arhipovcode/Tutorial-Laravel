@@ -1,4 +1,5 @@
 <div class="card-news">
+    <span class="card-news__status">Статус: {{ $status??'' }}</span>
     <h3 class="card-news__title">{{ $title }}</h3>
 
     <p class="card-news__description">{{ $description }}</p>
