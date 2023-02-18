@@ -90,8 +90,8 @@ return [
      |--------------------------------------------------------------------------
      |
      | Vendor files are included by default, but can be set to false.
-     | This can also be set to 'js' or 'css', to only include javascript or css vendor files.
-     | Vendor files are for css: font-awesome (including fonts) and highlight.js (css files)
+     | This can also be set to 'js' or 'scss', to only include javascript or scss vendor files.
+     | Vendor files are for scss: font-awesome (including fonts) and highlight.js (scss files)
      | and for js: jquery and and highlight.js
      | So if you want syntax highlighting, set it to true.
      | jQuery is set to not conflict with existing jQuery scripts.
@@ -185,7 +185,7 @@ return [
 
     'options' => [
         'auth' => [
-            'show_name' => true,   // Also show the user name/email in the debugbar
+            'show_name' => true,   // Also show the users name/email in the debugbar
         ],
         'db' => [
             'with_params'       => true,   // Render SQL with the parameters substituted

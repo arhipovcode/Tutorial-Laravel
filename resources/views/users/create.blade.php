@@ -7,7 +7,7 @@
         <div class="container">
             <h1 style="margin-bottom: 40px">Hello User... </h1>
 
-            <form method="post" action="{{ route('user.add.store') }}" class="form-user">
+            <form method="post" action="{{ route('users.add.store') }}" class="form-user">
                 @csrf
                 <div class="group-field">
                     <label for="user-name" class="form-create-news__label">Имя</label>

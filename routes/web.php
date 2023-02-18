@@ -49,8 +49,8 @@ Route::group([
 
 //User routes
 Route::group([
-    'prefix' => 'user',
-    'as' => 'user.'
+    'prefix' => 'users',
+    'as' => 'users.'
 ], function () {
     Route::get('/', UserController::class)->name('index');
     Route::resource('add', UserControlController::class);

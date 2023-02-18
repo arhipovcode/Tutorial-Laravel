@@ -16,6 +16,6 @@ class IndexController extends Controller
      */
     public function __invoke(Request $request): View
     {
-        return \view('user.index');
+        return \view('users.index');
     }
 }

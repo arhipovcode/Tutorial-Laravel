@@ -15,7 +15,7 @@ class UserControlController extends Controller
      */
     public function index(): View
     {
-        return \view('user.index');
+        return \view('users.index');
     }
 
     /**
@@ -25,7 +25,7 @@ class UserControlController extends Controller
      */
     public function create(): View
     {
-        return \view('user.create');
+        return \view('users.create');
     }
 
     /**
@@ -36,7 +36,7 @@ class UserControlController extends Controller
      */
     public function store(Request $request): View
     {
-        return \view('user.index',['nameUser' => $request->input('user-name')]);
+        return \view('users.index',['nameUser' => $request->input('user-name')]);
     }
 
     /**
