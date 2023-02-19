@@ -55,3 +55,11 @@ Route::group([
     Route::get('/', UserController::class)->name('index');
     Route::resource('add', UserControlController::class);
 });
+
+//Route::get('collection', function () {
+//    $names = ['Ann', 'John', 'Billy', 'Jain', 'Fedor'];
+//    $collect = \collect($names);
+//    $collect->each(function ($item, $key) {
+//        dd();
+//    });
+//});

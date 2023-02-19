@@ -5,6 +5,8 @@ namespace App\Http\Controllers\News;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\NewsTrait;
 use App\Models\News;
+use App\QueryBuilders\CategoriesQueryBuilder;
+use App\QueryBuilders\NewsQueryBuilder;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -12,12 +14,20 @@ class NewsController extends Controller
 {
     use NewsTrait;
 
-    public function index(): View
+//    public function index(): View
+//    {
+//        $news = new News();
+////        dd($news->getNews());
+//        return \view('news.news', ['news' => $news->getNews()]);
+//    }
+
+    public function index(NewsQueryBuilder $newsQueryBuilder): View
     {
-        $news = new News();
-//        dd($news->getNews());
-//        return \view('news.news', ['news' => $this->getNews()]);
-        return \view('news.news', ['news' => $news->getNews()]);
+//        $news = News::all();
+//        dd($news);
+        return \view('news.news', [
+            'news' => $newsQueryBuilder->getAll()
+        ]);
     }
 
     public function show(int $id): View

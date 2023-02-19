@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\NewsStatus;
 use App\Http\Controllers\Controller;
+use App\Models\News;
+use App\QueryBuilders\CategoriesQueryBuilder;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class NewsController extends Controller
 {
@@ -21,22 +26,37 @@ class NewsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param CategoriesQueryBuilder $categoriesQueryBuilder
      * @return View
      */
-    public function create(): View
+    public function create(CategoriesQueryBuilder $categoriesQueryBuilder): View
     {
-//        file_put_contents() для добавления файла
-        return \view('admin.news.create');
+        return \view('admin.news.create', [
+            'categories' => $categoriesQueryBuilder->getAll(),
+            'statuses' => NewsStatus::all(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
+        $request->validate([
+            'title' => 'required',
+        ]);
+
+//      $news = News::create(); //один из вариантов
+        $news = new News($request->except('_token', 'category_id'));
+
+        if($news->save()) {
+            return redirect()->route('news')->with('success', 'Новость успешно добавлена');
+        }
+
+        return \back()->with('error', 'Не удалось сохранить запись');
 //        dd($request->input('title')); // Получение одного поля
 //        dd($request->only(['title', 'description']));// Перечисление полей, которые нужны
 //        dd($request->except(['title', 'description'])); // Исключение
@@ -46,7 +66,7 @@ class NewsController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -56,31 +76,41 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param News $news
+     * @param CategoriesQueryBuilder $categoriesQueryBuilder
+     * @return View
      */
-    public function edit($id)
+    public function edit(News $news, CategoriesQueryBuilder $categoriesQueryBuilder): View
     {
-        //
+        return \view('admin.news.edit', [
+            'news' => $news,
+            'categories' => $categoriesQueryBuilder->getAll(),
+            'statuses' => NewsStatus::all(),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param News $news
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, News $news): RedirectResponse
     {
-        //
+        $news = $news->fill($request->except('_token', 'category_id'));
+        if($news->save()) {
+            return redirect()->route('news')->with('success', 'Новость успешно добавлена');
+        }
+
+        return \back()->with('error', 'Не удалось сохранить запись');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {
