@@ -18,6 +18,7 @@
                         :description="$item->description"
                         :author="$item->author"
                         :date="$item->created_at"
+                        :id="$item->id"
                         :linkEdit="route('admin.news.edit', ['news' => $item])"
                         :link="route('news::one', ['id' => $item->id])">
                     </x-cards.news>
@@ -28,3 +29,39 @@
         </div>
     </section>
 @endsection
+@push('js')
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', ready);
+
+        function ready() {
+            let linksDestroyed = document.querySelectorAll('.btn__delete');
+
+            if(linksDestroyed.length) {
+                linksDestroyed.forEach((el) => {
+                    el.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const id = e.target.getAttribute('id');
+                        if(confirm(`Подтверждаете удаление записи с #ID = ${id}`)) {
+                            send(`/admin/news/${id}`).then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            console.log('Удаление отменено!')
+                        }
+                    })
+                })
+            }
+        }
+
+        async function send(url) {
+            let response = await fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                }
+            })
+            let result = response.json();
+            return result.ok;
+        }
+    </script>
+@endpush
