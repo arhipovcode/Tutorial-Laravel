@@ -12,7 +12,7 @@
         <div class="container">
             <x-navigate.index>
                 @section('btn-admin')
-                    <a href="/" class="btn-out">Выйти</a>
+                    <a href="{{ route('account.logout') }}" class="btn-out">Выйти</a>
                 @endsection
             </x-navigate.index>
         </div>
