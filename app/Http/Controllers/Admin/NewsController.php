@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\NewsStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\News\CreateRequest;
 use App\Models\News;
 use App\QueryBuilders\CategoriesQueryBuilder;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -40,17 +42,14 @@ class NewsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param CreateRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(CreateRequest $request): RedirectResponse
     {
-        $request->validate([
-            'title' => 'required',
-        ]);
 
 //      $news = News::create(); //один из вариантов
-        $news = new News($request->except('_token', 'category_id'));
+        $news = News::create($request->validated());
 
         if($news->save()) {
             return redirect()->route('news')->with('success', 'Новость успешно добавлена');
@@ -109,11 +108,17 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return Response
+     * @param News $news
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(News $news): JsonResponse
     {
-        //
+        try {
+            $news->delete();
+            return \response()->json('ok');
+        } catch (\Exception $exception) {
+            \Log::error($exception->getMessage(), [$exception]);
+            return \response()->json('error', 400);
+        }
     }
 }

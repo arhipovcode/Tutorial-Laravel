@@ -17,7 +17,7 @@
         <a class="card-news__link" href="{{ $link }}">
             Посмотреть новость
         </a>
-        <a class="card-news__link btn__delete" href="{{ $link }}">
+        <a class="card-news__link btn__delete" id="{{ $id }}" href="javascript:;">
             Удалить
         </a>
     </div>
