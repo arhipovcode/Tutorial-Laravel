@@ -4,6 +4,7 @@ use App\Http\Controllers\Account\IndexController as AccountController;
 use App\Http\Controllers\Admin\IndexController as AdminController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\ParserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\User\IndexController as UserController;
 use App\Http\Controllers\User\UserControlController;
@@ -50,6 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
         'middleware' => 'is_admin',
     ], function () {
         Route::get('/', AdminController::class)->name('index');
+        Route::get('/parser', ParserController::class)->name('parser');
         Route::resource('categories', AdminCategoryController::class);
         Route::resource('news', AdminNewsController::class);
     });
