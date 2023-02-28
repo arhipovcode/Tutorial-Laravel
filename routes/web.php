@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Account\IndexController as AccountController;
 use App\Http\Controllers\Admin\IndexController as AdminController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\User\IndexController as UserController;
 use App\Http\Controllers\User\UserControlController;
 use App\Http\Controllers\Main\MainController;
@@ -37,15 +39,22 @@ Route::group([
     Route::get('/category', [CategoryController::class, 'index'])->name('::category');
 });
 
-//admin routes
-Route::group([
-    'prefix' => 'admin',
-    'as' => 'admin.'
-], function () {
-    Route::get('/', AdminController::class)->name('index');
-    Route::resource('categories', AdminCategoryController::class);
-    Route::resource('news', AdminNewsController::class);
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/logout', [LoginController::class, 'logout'])->name('account.logout');
+    Route::get('/account', AccountController::class)->name('account');
+
+    //admin routes
+    Route::group([
+        'prefix' => 'admin',
+        'as' => 'admin.',
+        'middleware' => 'is_admin',
+    ], function () {
+        Route::get('/', AdminController::class)->name('index');
+        Route::resource('categories', AdminCategoryController::class);
+        Route::resource('news', AdminNewsController::class);
+    });
 });
+
 
 //User routes
 Route::group([
@@ -56,6 +65,10 @@ Route::group([
     Route::resource('add', UserControlController::class);
 });
 
+//Route::get('session', function () {
+//    dd(session()->all());
+//});
+
 //Route::get('collection', function () {
 //    $names = ['Ann', 'John', 'Billy', 'Jain', 'Fedor'];
 //    $collect = \collect($names);
@@ -63,3 +76,7 @@ Route::group([
 //        dd();
 //    });
 //});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
