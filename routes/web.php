@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\ParserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\SocialProvidersController;
 use App\Http\Controllers\User\IndexController as UserController;
 use App\Http\Controllers\User\UserControlController;
 use App\Http\Controllers\Main\MainController;
@@ -82,3 +83,14 @@ Route::group([
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::group([
+    'middleware' => 'guest'
+], function () {
+    Route::get('/auth/redirect/{driver}', [SocialProvidersController::class, 'redirect'])
+        ->where('driver', '\w+')
+        ->name('social.auth.redirect');
+    Route::get('/auth/callback/{driver}', [SocialProvidersController::class, 'callback'])
+        ->where('driver', '\w+');
+});
