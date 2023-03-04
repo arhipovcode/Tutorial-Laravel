@@ -1,8 +1,16 @@
 <div class="card-news">
     <span class="card-news__status">Статус: {{ $status??'' }}</span>
+
+    @if($image)
+        <div class="card-news__image">
+            <img src="{{ Storage::disk('public')->url($image) }}" alt="">
+        </div>
+    @endif
+
     <h3 class="card-news__title">{{ $title }}</h3>
 
     <p class="card-news__description">{{ $category->map(fn($item) => $item->title)->implode(", ") }}</p>
+
     <p class="card-news__description">{{ $description }}</p>
 
     <div class="card-news__author">

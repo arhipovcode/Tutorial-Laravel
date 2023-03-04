@@ -24,7 +24,6 @@ class NewsController extends Controller
     public function index(NewsQueryBuilder $newsQueryBuilder): View
     {
 //        $news = News::all();
-//        dd($news);
         return \view('news.news', [
             'news' => $newsQueryBuilder->getAll()
         ]);

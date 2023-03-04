@@ -7,7 +7,7 @@
         <div class="container">
             <h2 class="create-news-title">Редактировать новость</h2>
 
-            <form method="post" action="{{ route('admin.news.update', ['news' => $news]) }}" class="form-create-news">
+            <form method="post" action="{{ route('admin.news.update', ['news' => $news]) }}" class="form-create-news" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="group-field">
@@ -50,3 +50,13 @@
     </section>
 @endsection
 
+@push('js')
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#description_news' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+@endpush

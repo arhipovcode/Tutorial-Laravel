@@ -8,6 +8,7 @@
             <h1>Административная панель</h1>
 
             <a style="margin-top: 20px;display: inline-block" href="{{ route('admin.news.create') }}">Добавить новость</a>
+            <a style="display: block;margin-top: 16px;color: #2d3748" href="{{ route('admin.parser') }}">Спарсить данные</a>
         </div>
     </section>
 @endsection
