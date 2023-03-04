@@ -7,7 +7,7 @@
         <div class="container">
             <h2 class="create-news-title">Добавить новость</h2>
 
-            <form method="post" action="{{ route('admin.news.store') }}" class="form-create-news">
+            <form method="post" action="{{ route('admin.news.store') }}" class="form-create-news" enctype="multipart/form-data">
                 @csrf
                 <div class="group-field">
                     <label for="category_id" class="form-create-news__label">Категория</label>

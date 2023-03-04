@@ -13,6 +13,7 @@
                 @forelse($news as $item)
                     <x-cards.news
                         :status="$item->status"
+                        :image="$item->image"
                         :category="$item->categories"
                         :title="$item->title"
                         :description="$item->description"

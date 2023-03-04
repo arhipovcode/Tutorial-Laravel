@@ -29,6 +29,6 @@
         @yield('footer')
     </footer>
 
-    <script src=""></script>
+    @stack('js')
 </body>
 </html>

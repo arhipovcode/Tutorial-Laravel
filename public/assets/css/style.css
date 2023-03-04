@@ -125,6 +125,12 @@ section {
 .card-news-one__title {
     margin-bottom: 12px;
 }
+.card-news__image {
+    width: 120px;
+}
+.card-news__image img {
+    width: 100%;
+}
 .card-news__description,
 .card-news-one__description {
     line-height: 21px;
